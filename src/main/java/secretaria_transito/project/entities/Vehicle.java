@@ -30,8 +30,8 @@ public class Vehicle {
     private VehicleType vehicleType;
 
     @ManyToOne()
-    @JoinColumn(name = "owner_id")
-    private Owner owner;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToMany(targetEntity = TrafficTicket.class, fetch = FetchType.LAZY, mappedBy = "vehicle")
     private List<TrafficTicket> trafficTickets;
