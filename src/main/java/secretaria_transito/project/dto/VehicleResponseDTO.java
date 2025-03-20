@@ -20,5 +20,5 @@ public class VehicleResponseDTO {
 
     private VehicleType vehicleType;
 
-    private Long ownerId;
+    private Integer userId;
 }

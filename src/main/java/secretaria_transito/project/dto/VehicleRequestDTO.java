@@ -18,6 +18,6 @@ public class VehicleRequestDTO {
 
     private VehicleType vehicleType;
 
-    private Long ownerId;
+    private Integer userId;
 
 }

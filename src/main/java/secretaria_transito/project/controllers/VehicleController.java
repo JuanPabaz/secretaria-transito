@@ -19,7 +19,7 @@ public class VehicleController {
     }
 
     @GetMapping("/{ownerId}")
-    public List<VehicleResponseDTO> getVehicle(@PathVariable Long ownerId) {
+    public List<VehicleResponseDTO> getVehicle(@PathVariable Integer ownerId) {
         return vehicleService.getVehicleByOwnerOwnerId(ownerId);
     }
 
