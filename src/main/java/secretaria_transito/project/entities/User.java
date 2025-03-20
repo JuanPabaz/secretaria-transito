@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import secretaria_transito.project.enums.OwnerType;
 import secretaria_transito.project.enums.Role;
 
 import java.util.Collection;
@@ -27,6 +28,15 @@ public class User implements UserDetails {
     @Column(name = "full_name_user")
     private String fullName;
 
+    @Column(name = "owner_type")
+    private OwnerType ownerType;
+
+    @Column(name = "id_number")
+    private String idNumber;
+
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "user_email")
     private String username;
 
@@ -35,6 +45,9 @@ public class User implements UserDetails {
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @OneToMany(targetEntity = Vehicle.class, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Vehicle> vehicleList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
