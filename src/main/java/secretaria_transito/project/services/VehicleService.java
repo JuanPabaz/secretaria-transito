@@ -25,6 +25,10 @@ public class VehicleService {
         this.userService = userService;
     }
 
+    public Optional<Vehicle> getVehicleByVehicleId(Long vehicleId) {
+        return vehicleRepository.findById(vehicleId);
+    }
+
     public List<VehicleResponseDTO> getVehicleByOwnerOwnerId(Integer ownerId) {
         return vehicleMapper.mapVehicleList(vehicleRepository.findVehicleByUserIdUser(ownerId));
     }
