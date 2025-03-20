@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
 
-    List<Vehicle> findVehicleByOwnerOwnerId(Long ownerId);
+    List<Vehicle> findVehicleByUserIdUser(Integer userId);
 }
