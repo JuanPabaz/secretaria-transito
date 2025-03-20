@@ -18,7 +18,7 @@ public class VehicleMapper {
                 .vehicleType(vehicle.getVehicleType())
                 .licensePlate(vehicle.getLicensePlate())
                 .brand(vehicle.getBrand())
-                .ownerId(vehicle.getOwner().getOwnerId())
+                .userId(vehicle.getUser().getIdUser())
                 .build();
     }
 
