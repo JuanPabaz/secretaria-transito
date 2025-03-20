@@ -51,6 +51,9 @@ public class AuthenticationService {
         registerRequestDTO.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
 
         User user = User.builder()
+                .address(registerRequestDTO.getAddress())
+                .ownerType(registerRequestDTO.getOwnerType())
+                .idNumber(registerRequestDTO.getIdNumber())
                 .username(registerRequestDTO.getUsername())
                 .password(registerRequestDTO.getPassword())
                 .role(registerRequestDTO.getRole())
