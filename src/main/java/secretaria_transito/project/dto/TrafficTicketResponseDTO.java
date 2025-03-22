@@ -19,6 +19,7 @@ public class TrafficTicketResponseDTO {
     private Vehicle vehicle;
     private Date date;
     private String description;
+    private Double price;
     private Long trafficAgentId;
     private Integer detectionCameraId;
 }
