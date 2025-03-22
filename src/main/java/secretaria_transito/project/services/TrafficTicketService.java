@@ -74,6 +74,8 @@ public class TrafficTicketService {
             invoiceDetail.setVehicleLicensePlate(vehicle.getLicensePlate());
             invoiceDetail.setVehicleBrandName(vehicle.getBrand());
             invoiceDetail.setValue(trafficTicket.getPrice());
+            Date dateNow = new Date();
+            invoiceDetail.setDate(dateNow);
             List<InvoiceDetail> invoiceDetailList = new ArrayList<>();
             invoiceDetailList.add(invoiceDetail);
 
