@@ -18,6 +18,7 @@ public class TrafficTicketMapper {
                 .date(trafficTicket.getDate())
                 .trafficAgentId(trafficTicket.getTrafficAgent().getTrafficAgentId())
                 .detectionCameraId(trafficTicket.getDetectionCamera().getCameraId())
+                .price(trafficTicket.getPrice())
                 .description(trafficTicket.getDescription())
                 .build();
     }
