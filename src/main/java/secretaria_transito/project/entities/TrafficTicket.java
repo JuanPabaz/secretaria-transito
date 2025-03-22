@@ -31,6 +31,9 @@ public class TrafficTicket {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "price")
+    private Double price;
+
     @ManyToOne
     @JoinColumn(name = "traffic_agent_id")
     private TrafficAgent trafficAgent;
