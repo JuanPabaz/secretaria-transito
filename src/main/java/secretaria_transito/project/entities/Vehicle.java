@@ -20,18 +20,12 @@ public class Vehicle {
     @Column(name = "vehicle_id")
     private Long vehicleId;
 
-    @Column(name = "license_plate")
-    private String licensePlate;
-
-    @Column(name = "brand")
-    private String brand;
-
     @Column(name = "vehicle_type")
     private VehicleType vehicleType;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "registration_id")
+    private Registration registration;
 
     @OneToMany(targetEntity = TrafficTicket.class, fetch = FetchType.LAZY, mappedBy = "vehicle")
     private List<TrafficTicket> trafficTickets;
