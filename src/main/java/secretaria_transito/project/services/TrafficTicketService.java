@@ -70,9 +70,10 @@ public class TrafficTicketService {
             }else{
                 invoiceDetail.setItem("Fotomulta");
             }
+
             invoiceDetail.setDescription(trafficTicket.getDescription());
-            invoiceDetail.setVehicleLicensePlate(vehicle.getLicensePlate());
-            invoiceDetail.setVehicleBrandName(vehicle.getBrand());
+            invoiceDetail.setVehicleLicensePlate(vehicle.getRegistration().getLicensePlate());
+            invoiceDetail.setVehicleBrandName(vehicle.getRegistration().getBrand());
             invoiceDetail.setValue(trafficTicket.getPrice());
             Date dateNow = new Date();
             invoiceDetail.setDate(dateNow);
