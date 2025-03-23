@@ -15,10 +15,10 @@ public class VehicleMapper {
         }
         return VehicleResponseDTO.builder()
                 .vehicleId(vehicle.getVehicleId())
+                .brand(vehicle.getRegistration().getBrand())
+                .licensePlate(vehicle.getRegistration().getLicensePlate())
+                .registrationDate(vehicle.getRegistration().getRegistrationDate())
                 .vehicleType(vehicle.getVehicleType())
-                .licensePlate(vehicle.getLicensePlate())
-                .brand(vehicle.getBrand())
-                .userId(vehicle.getUser().getIdUser())
                 .build();
     }
 
