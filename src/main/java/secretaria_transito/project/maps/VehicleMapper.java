@@ -19,6 +19,7 @@ public class VehicleMapper {
                 .licensePlate(vehicle.getRegistration().getLicensePlate())
                 .registrationDate(vehicle.getRegistration().getRegistrationDate())
                 .vehicleType(vehicle.getVehicleType())
+                .userId(vehicle.getRegistration().getUser().getIdUser())
                 .build();
     }
 
