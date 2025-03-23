@@ -17,9 +17,14 @@ public class TrafficTicketController {
         this.trafficTicketService = trafficTicketService;
     }
 
-    @GetMapping("/{idVehicle}")
-    public List<TrafficTicketResponseDTO> getTrafficTicket(@PathVariable Long idVehicle) {
+    @GetMapping("/vehicle/{idVehicle}")
+    public List<TrafficTicketResponseDTO> getTrafficTicketByVehicle(@PathVariable Long idVehicle) {
         return trafficTicketService.getTrafficTicketByVehicleId(idVehicle);
+    }
+
+    @GetMapping("/user/{idUser}")
+    public List<TrafficTicketResponseDTO> getTrafficTicketByUser(@PathVariable Integer idUser) {
+        return trafficTicketService.getTrafficTicketByUserId(idUser);
     }
 
     @GetMapping("/report")
