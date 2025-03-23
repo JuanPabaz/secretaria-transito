@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import secretaria_transito.project.enums.VehicleType;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +23,6 @@ public class VehicleResponseDTO {
     private VehicleType vehicleType;
 
     private Integer userId;
+
+    private Date registrationDate;
 }
