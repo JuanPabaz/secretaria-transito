@@ -38,6 +38,14 @@ public class TrafficTicketService {
         return trafficTicketMapper.mapTrafficTicketList(trafficTicketRepository.findTrafficTicketByVehicleVehicleId(vehicleId));
     }
 
+    public List<TrafficTicketResponseDTO> getTrafficTicketByUserId(Integer userId) {
+        Optional<User> userOptional = userService.findUserById(userId);
+        if (userOptional.isEmpty()) {
+            throw new BadCreateRequest("El propietario no existe.");
+        }
+        return trafficTicketMapper.mapTrafficTicketList(trafficTicketRepository.findTrafficTicketByUser(userId));
+    }
+
     public Map<String, String> generateInvoicePdf(Integer idUser, Long idVehicle, Long idTrafficTicket) {
         Optional<Vehicle> vehicleOptional = vehicleService.getVehicleByVehicleId(idVehicle);
         if (vehicleOptional.isEmpty()) {
