@@ -46,8 +46,8 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(targetEntity = Vehicle.class, fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Vehicle> vehicleList;
+    @OneToMany(targetEntity = Registration.class, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Registration> registrationList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
