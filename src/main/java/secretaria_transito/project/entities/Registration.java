@@ -1,31 +1,35 @@
 package secretaria_transito.project.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "registrarion")
+@Table(name = "registration")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Registration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "registrarion_id")
-    private Long registrarionId;
+    @Column(name = "registration_id")
+    private Long registrationId;
 
-    @OneToOne
-    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
+    @Column(name = "license_plate")
+    private String licensePlate;
 
-    @Column(name = "registrarion_date")
-    private Date registrarionDate;
+    @Column(name = "brand")
+    private String brand;
+
+    @Column(name = "registration_date")
+    private Date registrationDate;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
