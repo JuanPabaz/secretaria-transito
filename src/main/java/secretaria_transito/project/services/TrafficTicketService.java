@@ -3,6 +3,10 @@ package secretaria_transito.project.services;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import secretaria_transito.project.dto.TrafficTicketResponseDTO;
 import secretaria_transito.project.entities.TrafficTicket;
@@ -13,6 +17,7 @@ import secretaria_transito.project.maps.TrafficTicketMapper;
 import secretaria_transito.project.repositories.TrafficTicketRepository;
 import secretaria_transito.project.utils.InvoiceDetail;
 
+import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 @Service
@@ -46,13 +51,7 @@ public class TrafficTicketService {
         return trafficTicketMapper.mapTrafficTicketList(trafficTicketRepository.findTrafficTicketByUser(userId));
     }
 
-    public Map<String, String> generateInvoicePdf(Integer idUser, Long idVehicle, Long idTrafficTicket) {
-        Optional<Vehicle> vehicleOptional = vehicleService.getVehicleByVehicleId(idVehicle);
-        if (vehicleOptional.isEmpty()) {
-            throw new BadCreateRequest("El vehiculo no existe.");
-        }
-        Vehicle vehicle = vehicleOptional.get();
-
+    public ResponseEntity<byte[]> generateInvoicePdf(Integer idUser, Long idTrafficTicket) {
         Optional<User> userOptional = userService.findUserById(idUser);
         if (userOptional.isEmpty()) {
             throw new BadCreateRequest("El usuario no existe.");
@@ -72,32 +71,32 @@ public class TrafficTicketService {
             InvoiceDetail invoiceDetail = new InvoiceDetail();
             invoiceDetail.setIdNumber(user.getIdNumber());
             invoiceDetail.setName(user.getFullName());
-
-            if (trafficTicket.getTrafficAgent() != null) {
-                invoiceDetail.setItem("Parte");
-            }else{
-                invoiceDetail.setItem("Fotomulta");
-            }
-
+            invoiceDetail.setItem(trafficTicket.getTrafficAgent() != null ? "Parte" : "Fotomulta");
             invoiceDetail.setDescription(trafficTicket.getDescription());
-            invoiceDetail.setVehicleLicensePlate(vehicle.getRegistration().getLicensePlate());
-            invoiceDetail.setVehicleBrandName(vehicle.getRegistration().getBrand());
+            invoiceDetail.setVehicleLicensePlate(trafficTicket.getVehicle().getRegistration().getLicensePlate());
+            invoiceDetail.setVehicleBrandName(trafficTicket.getVehicle().getRegistration().getBrand());
             invoiceDetail.setValue(trafficTicket.getPrice());
-            Date dateNow = new Date();
-            invoiceDetail.setDate(dateNow);
-            List<InvoiceDetail> invoiceDetailList = new ArrayList<>();
-            invoiceDetailList.add(invoiceDetail);
+            invoiceDetail.setDate(new Date());
 
+            List<InvoiceDetail> invoiceDetailList = List.of(invoiceDetail);
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(invoiceDetailList);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperFilePath, null, dataSource);
-            JasperExportManager.exportReportToPdfFile(jasperPrint,"src/main/resources/jasperInvoiceReport/pagoPdf.pdf");
 
-            Map<String, String> response = new HashMap<>();
-            response.put("Message", "PDF generado exitosamente.");
-            return response;
+            // Convertir el PDF a un array de bytes
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+            byte[] pdfBytes = outputStream.toByteArray();
+
+            // Configurar headers para la respuesta HTTP
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "factura.pdf");
+
+            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
         } catch (JRException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al generar el PDF", e);
         }
     }
+
 }

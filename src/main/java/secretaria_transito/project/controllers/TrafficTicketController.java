@@ -1,5 +1,6 @@
 package secretaria_transito.project.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import secretaria_transito.project.dto.TrafficTicketResponseDTO;
 import secretaria_transito.project.services.TrafficTicketService;
@@ -28,10 +29,9 @@ public class TrafficTicketController {
     }
 
     @GetMapping("/report")
-    public Map<String, String> generateTrafficTicketInvoice(@RequestParam Long idVehicle,
-                                                            @RequestParam Long trafficTicketId,
-                                                            @RequestParam Integer userId) {
-        return trafficTicketService.generateInvoicePdf(userId, idVehicle, trafficTicketId);
+    public ResponseEntity<byte[]> generateTrafficTicketInvoice(@RequestParam Long trafficTicketId,
+                                                               @RequestParam Integer userId) {
+        return trafficTicketService.generateInvoicePdf(userId, trafficTicketId);
     }
 
 }
