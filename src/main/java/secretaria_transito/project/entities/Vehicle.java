@@ -1,18 +1,12 @@
 package secretaria_transito.project.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
 import secretaria_transito.project.enums.VehicleType;
 
 import java.util.List;
 
 @Entity
 @Table(name = "vehicle")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
 public class Vehicle {
 
     @Id
@@ -30,4 +24,45 @@ public class Vehicle {
     @OneToMany(targetEntity = TrafficTicket.class, fetch = FetchType.LAZY, mappedBy = "vehicle")
     private List<TrafficTicket> trafficTickets;
 
+    public Vehicle() {
+    }
+
+    public Vehicle(Long vehicleId, VehicleType vehicleType, Registration registration, List<TrafficTicket> trafficTickets) {
+        this.vehicleId = vehicleId;
+        this.vehicleType = vehicleType;
+        this.registration = registration;
+        this.trafficTickets = trafficTickets;
+    }
+
+    public Long getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public Registration getRegistration() {
+        return registration;
+    }
+
+    public void setRegistration(Registration registration) {
+        this.registration = registration;
+    }
+
+    public List<TrafficTicket> getTrafficTickets() {
+        return trafficTickets;
+    }
+
+    public void setTrafficTickets(List<TrafficTicket> trafficTickets) {
+        this.trafficTickets = trafficTickets;
+    }
 }

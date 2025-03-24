@@ -1,19 +1,11 @@
 package secretaria_transito.project.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "traffic_ticker")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class TrafficTicket {
 
     @Id
@@ -42,4 +34,72 @@ public class TrafficTicket {
     @JoinColumn(name = "detection_camera_id")
     private DetectionCamera detectionCamera;
 
+    public TrafficTicket() {
+    }
+
+    public TrafficTicket(Long trafficTicketId, Vehicle vehicle, Date date, String description, Double price, TrafficAgent trafficAgent, DetectionCamera detectionCamera) {
+        this.trafficTicketId = trafficTicketId;
+        this.vehicle = vehicle;
+        this.date = date;
+        this.description = description;
+        this.price = price;
+        this.trafficAgent = trafficAgent;
+        this.detectionCamera = detectionCamera;
+    }
+
+    public Long getTrafficTicketId() {
+        return trafficTicketId;
+    }
+
+    public void setTrafficTicketId(Long trafficTicketId) {
+        this.trafficTicketId = trafficTicketId;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public TrafficAgent getTrafficAgent() {
+        return trafficAgent;
+    }
+
+    public void setTrafficAgent(TrafficAgent trafficAgent) {
+        this.trafficAgent = trafficAgent;
+    }
+
+    public DetectionCamera getDetectionCamera() {
+        return detectionCamera;
+    }
+
+    public void setDetectionCamera(DetectionCamera detectionCamera) {
+        this.detectionCamera = detectionCamera;
+    }
 }

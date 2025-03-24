@@ -56,12 +56,12 @@ public class AuthController {
             Optional<RefreshToken> refreshTokenOptional = refreshTokenService.findByUsername(authRequest.getUsername());
             refreshTokenOptional.ifPresent(refreshTokenService::DeleteRefreshToken);
             RefreshToken refreshToken = refreshTokenService.createRefreshToken(authRequest.getUsername());
-            return AuthResponseDTO
-                    .builder()
-                    .accessToken(authenticationService.generateToken(authRequest.getUsername()))
-                    .refreshToken(refreshToken.getToken())
-                    .role(userRepository.findRoleByUsername(authRequest.getUsername()))
-                    .build();
+            AuthResponseDTO authResponseDTO = new AuthResponseDTO();
+            authResponseDTO.setRole(userRepository.findRoleByUsername(authRequest.getUsername()));
+            authResponseDTO.setRefreshToken(refreshToken.getToken());
+            authResponseDTO.setAccessToken(authenticationService.generateToken(authRequest.getUsername()));
+
+            return authResponseDTO;
 
         }catch (BadUserCredentialsException e){
             throw new BadUserCredentialsException(e.getMessage());
@@ -71,24 +71,29 @@ public class AuthController {
 
     }
 
-    @PostMapping("/refreshToken")
-    public AuthResponseDTO refreshToken(@RequestBody AuthResponseDTO authResponseDTO){
-
-        return refreshTokenService.findByToken(authResponseDTO.getRefreshToken())
-                .map(refreshTokenService::verifyExpiration)
-                .map(RefreshToken::getUser)
-                .map(userCredential -> {
-                    String accessToken = null;
-                    try {
-                        accessToken = jwtService.generateToken(userCredential.getUsername());
-                    } catch (ObjectNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                    return AuthResponseDTO.builder()
-                            .accessToken(accessToken)
-                            .refreshToken(authResponseDTO.getRefreshToken()).build();
-                }).orElseThrow(() ->new ExpiredRefreshTokenException("El refresh token no se encuentra en la base de datos"));
-    }
+//    @PostMapping("/refreshToken")
+//    public AuthResponseDTO refreshToken(@RequestBody AuthResponseDTO authResponseDTO){
+//
+//        return refreshTokenService.findByToken(authResponseDTO.getRefreshToken())
+//                .map(refreshTokenService::verifyExpiration)
+//                .map(RefreshToken::getUser)
+//                .map(userCredential -> {
+//                    String accessToken = null;
+//                    try {
+//                        accessToken = jwtService.generateToken(userCredential.getUsername());
+//                    } catch (ObjectNotFoundException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//
+//                    AuthResponseDTO authResponseDTO2 = new AuthResponseDTO();
+//                    authResponseDTO2.setAccessToken(accessToken);
+//                    authResponseDTO2.setRefreshToken(authResponseDTO.getRefreshToken());
+//
+//                    return AuthResponseDTO.builder()
+//                            .accessToken(accessToken)
+//                            .refreshToken(authResponseDTO.getRefreshToken()).build();
+//                }).orElseThrow(() ->new ExpiredRefreshTokenException("El refresh token no se encuentra en la base de datos"));
+//    }
 
     @GetMapping("/validateToken/{token}")
     public Map<String, Object> validateToken(@PathVariable(name = "token") String token){

@@ -13,14 +13,16 @@ public class VehicleMapper {
         if (vehicle == null) {
             return null;
         }
-        return VehicleResponseDTO.builder()
-                .vehicleId(vehicle.getVehicleId())
-                .brand(vehicle.getRegistration().getBrand())
-                .licensePlate(vehicle.getRegistration().getLicensePlate())
-                .registrationDate(vehicle.getRegistration().getRegistrationDate())
-                .vehicleType(vehicle.getVehicleType())
-                .userId(vehicle.getRegistration().getUser().getIdUser())
-                .build();
+
+        VehicleResponseDTO vehicleResponseDTO = new VehicleResponseDTO();
+        vehicleResponseDTO.setVehicleId(vehicle.getVehicleId());
+        vehicleResponseDTO.setVehicleType(vehicle.getVehicleType());
+        vehicleResponseDTO.setBrand(vehicle.getRegistration().getBrand());
+        vehicleResponseDTO.setLicensePlate(vehicle.getRegistration().getLicensePlate());
+        vehicleResponseDTO.setRegistrationDate(vehicle.getRegistration().getRegistrationDate());
+        vehicleResponseDTO.setUserId(vehicle.getRegistration().getUser().getIdUser());
+
+        return vehicleResponseDTO;
     }
 
     public List<VehicleResponseDTO> mapVehicleList(List<Vehicle> vehicleList) {

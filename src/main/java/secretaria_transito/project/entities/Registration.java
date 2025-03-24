@@ -1,17 +1,11 @@
 package secretaria_transito.project.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "registration")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
 public class Registration {
 
     @Id
@@ -32,4 +26,54 @@ public class Registration {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Registration() {
+    }
+
+    public Registration(Long registrationId, String licensePlate, String brand, Date registrationDate, User user) {
+        this.registrationId = registrationId;
+        this.licensePlate = licensePlate;
+        this.brand = brand;
+        this.registrationDate = registrationDate;
+        this.user = user;
+    }
+
+    public Long getRegistrationId() {
+        return registrationId;
+    }
+
+    public void setRegistrationId(Long registrationId) {
+        this.registrationId = registrationId;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

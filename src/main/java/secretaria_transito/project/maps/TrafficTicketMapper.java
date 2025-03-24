@@ -13,14 +13,25 @@ public class TrafficTicketMapper {
         if (trafficTicket == null) {
             return null;
         }
-        return TrafficTicketResponseDTO.builder()
-                .trafficTicketId(trafficTicket.getTrafficTicketId())
-                .date(trafficTicket.getDate())
-                .trafficAgentId(trafficTicket.getTrafficAgent().getTrafficAgentId())
-                .detectionCameraId(trafficTicket.getDetectionCamera().getCameraId())
-                .price(trafficTicket.getPrice())
-                .description(trafficTicket.getDescription())
-                .build();
+
+        TrafficTicketResponseDTO trafficTicketResponseDTO = new TrafficTicketResponseDTO();
+        trafficTicketResponseDTO.setTrafficTicketId(trafficTicket.getTrafficTicketId());
+        trafficTicketResponseDTO.setDate(trafficTicket.getDate());
+        trafficTicketResponseDTO.setTrafficAgentId(
+                (trafficTicket.getTrafficAgent() != null && trafficTicket.getTrafficAgent().getTrafficAgentId() != null)
+                        ? trafficTicket.getTrafficAgent().getTrafficAgentId()
+                        : 0L
+        );
+        trafficTicketResponseDTO.setDescription(trafficTicket.getDescription());
+        trafficTicketResponseDTO.setVehicleId(trafficTicket.getVehicle().getVehicleId());
+        trafficTicketResponseDTO.setDetectionCameraId(
+                (trafficTicket.getDetectionCamera() != null && trafficTicket.getDetectionCamera().getCameraId() != null)
+                        ? trafficTicket.getDetectionCamera().getCameraId()
+                        : 0
+        );
+        trafficTicketResponseDTO.setPrice(trafficTicket.getPrice());
+
+        return trafficTicketResponseDTO;
     }
 
     public List<TrafficTicketResponseDTO> mapTrafficTicketList(List<TrafficTicket> trafficTicketList) {

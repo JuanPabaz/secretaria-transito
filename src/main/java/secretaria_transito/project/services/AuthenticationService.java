@@ -50,15 +50,14 @@ public class AuthenticationService {
         registerRequestDTO.setRole(Role.ADMIN);
         registerRequestDTO.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
 
-        User user = User.builder()
-                .address(registerRequestDTO.getAddress())
-                .ownerType(registerRequestDTO.getOwnerType())
-                .idNumber(registerRequestDTO.getIdNumber())
-                .username(registerRequestDTO.getUsername())
-                .password(registerRequestDTO.getPassword())
-                .role(registerRequestDTO.getRole())
-                .fullName(registerRequestDTO.getFullName())
-                .build();
+        User user = new User();
+        user.setUsername(registerRequestDTO.getUsername());
+        user.setPassword(registerRequestDTO.getPassword());
+        user.setRole(registerRequestDTO.getRole());
+        user.setOwnerType(registerRequestDTO.getOwnerType());
+        user.setIdNumber(registerRequestDTO.getIdNumber());
+        user.setAddress(registerRequestDTO.getAddress());
+        user.setFullName(registerRequestDTO.getFullName());
 
         return mapUser.mapUsuario(userRepository.save(user));
     }

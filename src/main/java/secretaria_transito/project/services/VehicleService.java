@@ -42,17 +42,17 @@ public class VehicleService {
             throw new BadCreateRequest("No se encontró el propietario.");
         }
 
-        Registration registration = registrationService.save(Registration.builder()
-                .user(userOptional.get())
-                .registrationDate(vehicleRequestDTO.getRegistrationDate())
-                .brand(vehicleRequestDTO.getBrand())
-                .licensePlate(vehicleRequestDTO.getLicensePlate())
-                .build());
+        Registration registration = new Registration();
+        registration.setUser(userOptional.get());
+        registration.setRegistrationDate(vehicleRequestDTO.getRegistrationDate());
+        registration.setBrand(vehicleRequestDTO.getBrand());
+        registration.setLicensePlate(vehicleRequestDTO.getLicensePlate());
 
-        Vehicle vehicle = Vehicle.builder()
-                .vehicleType(vehicleRequestDTO.getVehicleType())
-                .registration(registration)
-                .build();
+        Registration registrationSaved = registrationService.save(registration);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistration(registrationSaved);
+        vehicle.setVehicleType(vehicleRequestDTO.getVehicleType());
 
         return vehicleMapper.mapVehicle(vehicleRepository.save(vehicle));
     }

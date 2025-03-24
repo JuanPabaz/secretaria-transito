@@ -1,19 +1,11 @@
 package secretaria_transito.project.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Table(name = "traffic_agent")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class TrafficAgent {
 
     @Id
@@ -30,4 +22,45 @@ public class TrafficAgent {
     @OneToMany(targetEntity = TrafficTicket.class, fetch = FetchType.LAZY, mappedBy = "trafficAgent")
     private List<TrafficTicket> trafficTickets;
 
+    public TrafficAgent() {
+    }
+
+    public TrafficAgent(Long trafficAgentId, String name, String idNumber, List<TrafficTicket> trafficTickets) {
+        this.trafficAgentId = trafficAgentId;
+        this.name = name;
+        this.idNumber = idNumber;
+        this.trafficTickets = trafficTickets;
+    }
+
+    public Long getTrafficAgentId() {
+        return trafficAgentId;
+    }
+
+    public void setTrafficAgentId(Long trafficAgentId) {
+        this.trafficAgentId = trafficAgentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public List<TrafficTicket> getTrafficTickets() {
+        return trafficTickets;
+    }
+
+    public void setTrafficTickets(List<TrafficTicket> trafficTickets) {
+        this.trafficTickets = trafficTickets;
+    }
 }

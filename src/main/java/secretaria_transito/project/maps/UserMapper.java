@@ -13,12 +13,14 @@ public class UserMapper {
         if (user == null) {
             return null;
         }
-        return UserResponseDTO.builder()
-                .idUser(user.getIdUser())
-                .fullName(user.getFullName())
-                .role(user.getRole())
-                .username(user.getUsername())
-                .build();
+
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.setIdUser(user.getIdUser());
+        userResponseDTO.setFullName(user.getFullName());
+        userResponseDTO.setRole(user.getRole());
+        userResponseDTO.setUsername(user.getUsername());
+
+        return userResponseDTO;
     }
 
     public List<UserResponseDTO> mapUsuarioList(List<User> userList) {

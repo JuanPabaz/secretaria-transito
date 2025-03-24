@@ -27,11 +27,11 @@ public class RefreshTokenService {
     }
 
     public RefreshToken createRefreshToken(String username){
-        RefreshToken refreshToken = RefreshToken.builder()
-                .user(userRepository.findByUsername(username).get())
-                .token(UUID.randomUUID().toString())
-                .expiryDate(Instant.now().plusMillis(refreshTokenExpire))
-                .build();
+        RefreshToken refreshToken = new RefreshToken();
+        refreshToken.setUser(userRepository.findByUsername(username).get());
+        refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setExpiryDate(Instant.now().plusSeconds(refreshTokenExpire));
+
         return refreshTokenRepository.save(refreshToken);
     }
 

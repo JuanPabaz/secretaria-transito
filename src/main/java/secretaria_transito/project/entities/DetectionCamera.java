@@ -1,19 +1,11 @@
 package secretaria_transito.project.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Table(name = "detection_camera")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class DetectionCamera {
 
     @Id
@@ -26,4 +18,37 @@ public class DetectionCamera {
 
     @OneToMany(targetEntity = TrafficTicket.class, fetch = FetchType.LAZY, mappedBy = "detectionCamera")
     private List<TrafficTicket> trafficTickets;
+
+    public DetectionCamera() {
+    }
+
+    public DetectionCamera(Integer cameraId, String location, List<TrafficTicket> trafficTickets) {
+        this.cameraId = cameraId;
+        this.location = location;
+        this.trafficTickets = trafficTickets;
+    }
+
+    public Integer getCameraId() {
+        return cameraId;
+    }
+
+    public void setCameraId(Integer cameraId) {
+        this.cameraId = cameraId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public List<TrafficTicket> getTrafficTickets() {
+        return trafficTickets;
+    }
+
+    public void setTrafficTickets(List<TrafficTicket> trafficTickets) {
+        this.trafficTickets = trafficTickets;
+    }
 }
