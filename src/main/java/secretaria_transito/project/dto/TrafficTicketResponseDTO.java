@@ -1,7 +1,5 @@
 package secretaria_transito.project.dto;
 
-import secretaria_transito.project.entities.Vehicle;
-
 import java.util.Date;
 
 public class TrafficTicketResponseDTO {
