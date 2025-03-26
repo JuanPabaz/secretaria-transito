@@ -5,24 +5,24 @@ import java.util.Date;
 public class TrafficTicketResponseDTO {
 
     private Long trafficTicketId;
-    private Long vehicleId;
+    private String licensePlate;
     private Date date;
     private String description;
     private Double price;
-    private Long trafficAgentId;
-    private Integer detectionCameraId;
+    private String trafficAgentName;
+    private String cameraLocation;
 
     public TrafficTicketResponseDTO() {
     }
 
-    public TrafficTicketResponseDTO(Long trafficTicketId, Long vehicleId, Date date, String description, Double price, Long trafficAgentId, Integer detectionCameraId) {
+    public TrafficTicketResponseDTO(Long trafficTicketId, String licensePlate, Date date, String description, Double price, String trafficAgentName, String cameraLocation) {
         this.trafficTicketId = trafficTicketId;
-        this.vehicleId = vehicleId;
+        this.licensePlate = licensePlate;
         this.date = date;
         this.description = description;
         this.price = price;
-        this.trafficAgentId = trafficAgentId;
-        this.detectionCameraId = detectionCameraId;
+        this.trafficAgentName = trafficAgentName;
+        this.cameraLocation = cameraLocation;
     }
 
     public Long getTrafficTicketId() {
@@ -33,12 +33,12 @@ public class TrafficTicketResponseDTO {
         this.trafficTicketId = trafficTicketId;
     }
 
-    public Long getVehicleId() {
-        return vehicleId;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setVehicleId(Long vehicleId) {
-        this.vehicleId = vehicleId;
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     public Date getDate() {
@@ -65,19 +65,19 @@ public class TrafficTicketResponseDTO {
         this.price = price;
     }
 
-    public Long getTrafficAgentId() {
-        return trafficAgentId;
+    public String getTrafficAgentName() {
+        return trafficAgentName;
     }
 
-    public void setTrafficAgentId(Long trafficAgentId) {
-        this.trafficAgentId = trafficAgentId;
+    public void setTrafficAgentName(String trafficAgentName) {
+        this.trafficAgentName = trafficAgentName;
     }
 
-    public Integer getDetectionCameraId() {
-        return detectionCameraId;
+    public String getCameraLocation() {
+        return cameraLocation;
     }
 
-    public void setDetectionCameraId(Integer detectionCameraId) {
-        this.detectionCameraId = detectionCameraId;
+    public void setCameraLocation(String cameraLocation) {
+        this.cameraLocation = cameraLocation;
     }
 }

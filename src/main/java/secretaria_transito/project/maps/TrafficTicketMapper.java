@@ -17,17 +17,16 @@ public class TrafficTicketMapper {
         TrafficTicketResponseDTO trafficTicketResponseDTO = new TrafficTicketResponseDTO();
         trafficTicketResponseDTO.setTrafficTicketId(trafficTicket.getTrafficTicketId());
         trafficTicketResponseDTO.setDate(trafficTicket.getDate());
-        trafficTicketResponseDTO.setTrafficAgentId(
+        trafficTicketResponseDTO.setTrafficAgentName(
                 (trafficTicket.getTrafficAgent() != null && trafficTicket.getTrafficAgent().getTrafficAgentId() != null)
-                        ? trafficTicket.getTrafficAgent().getTrafficAgentId()
-                        : 0L
+                        ? trafficTicket.getTrafficAgent().getName()
+                        : "N/A"
         );
         trafficTicketResponseDTO.setDescription(trafficTicket.getDescription());
-        trafficTicketResponseDTO.setVehicleId(trafficTicket.getVehicle().getVehicleId());
-        trafficTicketResponseDTO.setDetectionCameraId(
+        trafficTicketResponseDTO.setLicensePlate(trafficTicket.getVehicle().getRegistration().getLicensePlate());
+        trafficTicketResponseDTO.setCameraLocation(
                 (trafficTicket.getDetectionCamera() != null && trafficTicket.getDetectionCamera().getCameraId() != null)
-                        ? trafficTicket.getDetectionCamera().getCameraId()
-                        : 0
+                        ? trafficTicket.getDetectionCamera().getLocation() : "N/A"
         );
         trafficTicketResponseDTO.setPrice(trafficTicket.getPrice());
 
