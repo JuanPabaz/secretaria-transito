@@ -14,19 +14,19 @@ public class VehicleResponseDTO {
 
     private VehicleType vehicleType;
 
-    private Integer userId;
+    private String ownerName;
 
     private Date registrationDate;
 
     public VehicleResponseDTO() {
     }
 
-    public VehicleResponseDTO(Long vehicleId, String licensePlate, String brand, VehicleType vehicleType, Integer userId, Date registrationDate) {
+    public VehicleResponseDTO(Long vehicleId, String licensePlate, String brand, VehicleType vehicleType, String ownerName, Date registrationDate) {
         this.vehicleId = vehicleId;
         this.licensePlate = licensePlate;
         this.brand = brand;
         this.vehicleType = vehicleType;
-        this.userId = userId;
+        this.ownerName = ownerName;
         this.registrationDate = registrationDate;
     }
 
@@ -62,12 +62,12 @@ public class VehicleResponseDTO {
         this.vehicleType = vehicleType;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getOwnerName() {
+        return ownerName;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public Date getRegistrationDate() {

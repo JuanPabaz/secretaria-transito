@@ -5,6 +5,8 @@ import java.util.Date;
 public class TrafficTicketResponseDTO {
 
     private Long trafficTicketId;
+    private Integer userId;
+    private Long vehicleId;
     private String licensePlate;
     private Date date;
     private String description;
@@ -15,8 +17,10 @@ public class TrafficTicketResponseDTO {
     public TrafficTicketResponseDTO() {
     }
 
-    public TrafficTicketResponseDTO(Long trafficTicketId, String licensePlate, Date date, String description, Double price, String trafficAgentName, String cameraLocation) {
+    public TrafficTicketResponseDTO(Long trafficTicketId, Integer userId, Long vehicleId, String licensePlate, Date date, String description, Double price, String trafficAgentName, String cameraLocation) {
         this.trafficTicketId = trafficTicketId;
+        this.userId = userId;
+        this.vehicleId = vehicleId;
         this.licensePlate = licensePlate;
         this.date = date;
         this.description = description;
@@ -79,5 +83,21 @@ public class TrafficTicketResponseDTO {
 
     public void setCameraLocation(String cameraLocation) {
         this.cameraLocation = cameraLocation;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Long getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Long vehicleId) {
+        this.vehicleId = vehicleId;
     }
 }

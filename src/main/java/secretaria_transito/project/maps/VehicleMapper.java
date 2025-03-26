@@ -20,7 +20,7 @@ public class VehicleMapper {
         vehicleResponseDTO.setBrand(vehicle.getRegistration().getBrand());
         vehicleResponseDTO.setLicensePlate(vehicle.getRegistration().getLicensePlate());
         vehicleResponseDTO.setRegistrationDate(vehicle.getRegistration().getRegistrationDate());
-        vehicleResponseDTO.setUserId(vehicle.getRegistration().getUser().getIdUser());
+        vehicleResponseDTO.setOwnerName(vehicle.getRegistration().getUser().getFullName());
 
         return vehicleResponseDTO;
     }

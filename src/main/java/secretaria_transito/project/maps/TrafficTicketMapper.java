@@ -15,6 +15,8 @@ public class TrafficTicketMapper {
         }
 
         TrafficTicketResponseDTO trafficTicketResponseDTO = new TrafficTicketResponseDTO();
+        trafficTicketResponseDTO.setVehicleId(trafficTicket.getVehicle().getVehicleId());
+        trafficTicketResponseDTO.setUserId(trafficTicket.getVehicle().getRegistration().getUser().getIdUser());
         trafficTicketResponseDTO.setTrafficTicketId(trafficTicket.getTrafficTicketId());
         trafficTicketResponseDTO.setDate(trafficTicket.getDate());
         trafficTicketResponseDTO.setTrafficAgentName(
